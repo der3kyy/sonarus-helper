@@ -20,6 +20,8 @@ public final class ServerAddressMatcher {
         }
 
         return normalized.equals(SONARUS_HOST)
-                || normalized.startsWith(SONARUS_HOST + ":");
+                || normalized.startsWith(SONARUS_HOST + ":")
+                || normalized.equals("10.29.240.51:26565")
+                || normalized.equals("178.168.208.14:26565");
     }
 }

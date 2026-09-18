@@ -4,11 +4,11 @@ Client-side Fabric helper for the Sonarus Minecraft server.
 
 ## Version
 
-Sonarus Helper **1.1**.
+Sonarus Helper **1.2**.
 
 ## Features
 
-While connected through `play.sonarus.win`:
+While connected through Sonarus:
 
 - `Enter` and numpad `Enter` activate the visible `Войти` button on Minecraft Dialog API screens;
 - press `H` to open Sonarus Helper settings;
@@ -17,6 +17,8 @@ While connected through `play.sonarus.win`:
 - built-in update checker for GitHub Releases;
 - optional automatic download of the correct JAR for the current Minecraft version, installed after Minecraft closes;
 - no Sonarus Helper diagnostic runtime logging.
+
+Recognized Sonarus addresses include `play.sonarus.win`, `10.29.240.51:26565`, and `178.168.208.14:26565`.
 
 Settings are stored locally in `config/sonarus-helper.json`.
 
