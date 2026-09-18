@@ -12,7 +12,7 @@ import win.sonarus.helper.core.SonarusServer;
 public abstract class ClientPlayNetworkHandlerMixin {
     @Inject(method = "sendChatCommand", at = @At("HEAD"), cancellable = true)
     private void sonarusHelper$handleCommand(String command, CallbackInfo ci) {
-        if (!SonarusServer.isConnected() || !"sonarus".equalsIgnoreCase(command.trim())) {
+        if (!SonarusServer.isConnected() || !"shelp".equalsIgnoreCase(command.trim())) {
             return;
         }
 
