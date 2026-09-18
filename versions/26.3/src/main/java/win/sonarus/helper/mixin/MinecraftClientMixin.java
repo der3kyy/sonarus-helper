@@ -8,15 +8,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import win.sonarus.helper.SonarusHelperClient;
 import win.sonarus.helper.core.SonarusServer;
 import win.sonarus.helper.gui.SonarusSettingsScreen;
-import win.sonarus.helper.notifications.ClientFocusState;
 
 @Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin {
     @Inject(method = "tick", at = @At("TAIL"))
     private void sonarusHelper$onTick(CallbackInfo ci) {
         Minecraft client = (Minecraft) (Object) this;
-
-        ClientFocusState.setFocused(client.isWindowActive());
 
         if (client.gui.screen() == null
                 && SonarusServer.isConnected()

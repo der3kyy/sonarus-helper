@@ -3,7 +3,6 @@
   "package": "win.sonarus.helper.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "ChatHudMixin",
     "ClientPlayNetworkHandlerMixin",
     "DialogScreenAccessor",
     "MinecraftClientMixin",

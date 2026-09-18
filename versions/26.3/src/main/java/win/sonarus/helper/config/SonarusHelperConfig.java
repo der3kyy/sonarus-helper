@@ -3,7 +3,6 @@ package win.sonarus.helper.config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-import win.sonarus.helper.notifications.NotificationType;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -18,10 +17,6 @@ public final class SonarusHelperConfig {
 
     private static SonarusHelperConfig instance = defaults();
 
-    public boolean notificationsEnabled = true;
-    public boolean notificationsOnlyWhenUnfocused = true;
-    public boolean notifyMentions = true;
-    public boolean notifyUpdates = true;
 
     public boolean checkUpdates = true;
     public boolean autoDownloadUpdates = false;
@@ -62,10 +57,4 @@ public final class SonarusHelperConfig {
         }
     }
 
-    public boolean isEnabled(NotificationType type) {
-        return switch (type) {
-            case MENTION -> notifyMentions;
-            case UPDATE -> notifyUpdates;
-        };
-    }
 }

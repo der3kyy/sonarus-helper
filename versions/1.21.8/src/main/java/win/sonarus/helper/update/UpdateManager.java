@@ -7,8 +7,6 @@ import com.google.gson.JsonParser;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import win.sonarus.helper.config.SonarusHelperConfig;
-import win.sonarus.helper.notifications.NotificationType;
-import win.sonarus.helper.notifications.WindowsNotifier;
 
 import java.io.IOException;
 import java.net.URI;
@@ -92,11 +90,6 @@ public final class UpdateManager {
 
                 setState(State.AVAILABLE, "Доступна версия " + release.version());
 
-                WindowsNotifier.show(
-                        NotificationType.UPDATE,
-                        "Доступно обновление Sonarus Helper",
-                        "Версия " + release.version() + " для Minecraft " + currentMinecraftVersion()
-                );
 
                 if (config.autoDownloadUpdates) {
                     downloadAndScheduleInternal(release);

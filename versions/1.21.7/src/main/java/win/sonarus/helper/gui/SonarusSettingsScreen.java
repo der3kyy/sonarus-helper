@@ -4,12 +4,10 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 import win.sonarus.helper.config.SonarusHelperConfig;
-import win.sonarus.helper.notifications.WindowsNotifier;
 import win.sonarus.helper.update.UpdateManager;
 
 public final class SonarusSettingsScreen extends Screen {
     private final Screen parent;
-    private Page page = Page.NOTIFICATIONS;
     private long updateRevision = -1L;
 
     public SonarusSettingsScreen(Screen parent) {
@@ -22,88 +20,16 @@ public final class SonarusSettingsScreen extends Screen {
         int center = this.width / 2;
         int left = center - 155;
         int right = center + 5;
-
-        addLabel(center - 155, 18, 310, "Sonarus Helper 1.1");
-
-        this.addDrawableChild(ButtonWidget.builder(
-                Text.literal(page == Page.NOTIFICATIONS ? "§aУведомления" : "Уведомления"),
-                button -> {
-                    page = Page.NOTIFICATIONS;
-                    this.clearAndInit();
-                }
-        ).dimensions(left, 48, 150, 20).build());
-
-        this.addDrawableChild(ButtonWidget.builder(
-                Text.literal(page == Page.UPDATES ? "§aОбновления" : "Обновления"),
-                button -> {
-                    page = Page.UPDATES;
-                    this.clearAndInit();
-                }
-        ).dimensions(right, 48, 150, 20).build());
-
-        if (page == Page.NOTIFICATIONS) {
-            buildNotifications(left, right);
-        } else {
-            buildUpdates(left, right);
-        }
-
-        this.addDrawableChild(ButtonWidget.builder(
-                Text.literal("Готово"),
-                button -> close()
-        ).dimensions(center - 75, this.height - 32, 150, 20).build());
-
-        updateRevision = UpdateManager.revision();
-    }
-
-    private void buildNotifications(int left, int right) {
         SonarusHelperConfig config = SonarusHelperConfig.get();
 
-        addToggle(left, 82, 310, "Уведомления Windows", config.notificationsEnabled, value -> {
-            config.notificationsEnabled = value;
-            SonarusHelperConfig.save();
-        });
+        addLabel(left, 18, 310, "Sonarus Helper 1.1");
 
-        addToggle(left, 108, 310, "Только когда Minecraft не в фокусе", config.notificationsOnlyWhenUnfocused, value -> {
-            config.notificationsOnlyWhenUnfocused = value;
-            SonarusHelperConfig.save();
-        });
-
-        addToggle(left, 140, 150, "Упоминания ника", config.notifyMentions, value -> {
-            config.notifyMentions = value;
-            SonarusHelperConfig.save();
-        });
-
-        addToggle(right, 140, 150, "Обновления Helper", config.notifyUpdates, value -> {
-            config.notifyUpdates = value;
-            SonarusHelperConfig.save();
-        });
-
-        this.addDrawableChild(ButtonWidget.builder(
-                Text.literal("Тестовое уведомление"),
-                button -> WindowsNotifier.showTest()
-        ).dimensions(left, 172, 150, 20).build());
-
-        addLabel(
-                right,
-                172,
-                150,
-                WindowsNotifier.isSupported()
-                        ? "Windows: доступно"
-                        : "Windows: недоступно"
-        );
-
-        addLabel(left, 204, 310, "Открыть настройки в игре: H");
-    }
-
-    private void buildUpdates(int left, int right) {
-        SonarusHelperConfig config = SonarusHelperConfig.get();
-
-        addToggle(left, 82, 310, "Проверять обновления", config.checkUpdates, value -> {
+        addToggle(left, 58, 310, "Проверять обновления", config.checkUpdates, value -> {
             config.checkUpdates = value;
             SonarusHelperConfig.save();
         });
 
-        addToggle(left, 108, 310, "Автоматически скачивать обновления", config.autoDownloadUpdates, value -> {
+        addToggle(left, 84, 310, "Автоматически скачивать обновления", config.autoDownloadUpdates, value -> {
             config.autoDownloadUpdates = value;
             SonarusHelperConfig.save();
         });
@@ -114,7 +40,7 @@ public final class SonarusSettingsScreen extends Screen {
                     UpdateManager.checkAsync(true);
                     this.clearAndInit();
                 }
-        ).dimensions(left, 140, 150, 20).build());
+        ).dimensions(left, 116, 150, 20).build());
 
         if (UpdateManager.updateAvailable()) {
             this.addDrawableChild(ButtonWidget.builder(
@@ -123,13 +49,21 @@ public final class SonarusSettingsScreen extends Screen {
                         UpdateManager.downloadAndScheduleAsync();
                         this.clearAndInit();
                     }
-            ).dimensions(right, 140, 150, 20).build());
+            ).dimensions(right, 116, 150, 20).build());
         } else {
-            addLabel(right, 140, 150, "Sonarus Helper 1.1");
+            addLabel(right, 116, 150, "Sonarus Helper 1.1");
         }
 
-        addLabel(left, 172, 310, UpdateManager.statusText());
-        addLabel(left, 204, 310, "Установка выполняется после выхода из Minecraft");
+        addLabel(left, 148, 310, UpdateManager.statusText());
+        addLabel(left, 180, 310, "Настройки открываются командой /shelp");
+        addLabel(left, 206, 310, "Установка обновления — после выхода из Minecraft");
+
+        this.addDrawableChild(ButtonWidget.builder(
+                Text.literal("Готово"),
+                button -> close()
+        ).dimensions(center - 75, this.height - 32, 150, 20).build());
+
+        updateRevision = UpdateManager.revision();
     }
 
     @Override
@@ -137,7 +71,7 @@ public final class SonarusSettingsScreen extends Screen {
         super.tick();
 
         long revision = UpdateManager.revision();
-        if (page == Page.UPDATES && revision != updateRevision) {
+        if (revision != updateRevision) {
             updateRevision = revision;
             this.clearAndInit();
         }
@@ -169,11 +103,6 @@ public final class SonarusSettingsScreen extends Screen {
         ).dimensions(x, y, width, 20).build();
         label.active = false;
         this.addDrawableChild(label);
-    }
-
-    private enum Page {
-        NOTIFICATIONS,
-        UPDATES
     }
 
     @FunctionalInterface
