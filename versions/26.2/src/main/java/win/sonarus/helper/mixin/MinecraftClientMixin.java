@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import win.sonarus.helper.SonarusHelperClient;
 import win.sonarus.helper.core.SonarusServer;
 import win.sonarus.helper.gui.SonarusSettingsScreen;
 import win.sonarus.helper.notifications.ClientFocusState;
@@ -19,6 +20,12 @@ public abstract class MinecraftClientMixin {
         Minecraft client = (Minecraft) (Object) this;
 
         ClientFocusState.setFocused(client.isWindowActive());
+
+        if (client.gui.screen() == null
+                && SonarusServer.isConnected()
+                && SonarusHelperClient.consumeSettingsMenuRequest()) {
+            client.gui.setScreen(new SonarusSettingsScreen(null));
+        }
 
         boolean hDown = InputConstants.isKeyDown(
                 client.getWindow(),
