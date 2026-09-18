@@ -23,7 +23,7 @@ public final class SonarusSettingsScreen extends Screen {
         int left = center - 155;
         int right = center + 5;
 
-        addLabel(left, 18, 310, "Sonarus Helper 1.0");
+        addLabel(left, 18, 310, "Sonarus Helper 1.1");
 
         this.addRenderableWidget(Button.builder(
                 Component.literal(page == Page.NOTIFICATIONS ? "§aУведомления" : "Уведомления"),
@@ -125,7 +125,7 @@ public final class SonarusSettingsScreen extends Screen {
                     }
             ).bounds(right, 140, 150, 20).build());
         } else {
-            addLabel(right, 140, 150, "Sonarus Helper 1.0");
+            addLabel(right, 140, 150, "Sonarus Helper 1.1");
         }
 
         addLabel(left, 172, 310, UpdateManager.statusText());

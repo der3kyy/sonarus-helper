@@ -24,3 +24,9 @@ Thumbs.db
 hs_err_pid*.log
 *.tmp
 *.temp
+
+# Local helper/build scripts
+*.ps1
+*.py
+*.pyc
+__pycache__/
