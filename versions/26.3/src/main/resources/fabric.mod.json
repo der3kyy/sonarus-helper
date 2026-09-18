@@ -8,6 +8,11 @@
     "der3kyy"
   ],
   "environment": "client",
+  "entrypoints": {
+    "client": [
+      "win.sonarus.helper.SonarusHelperClient"
+    ]
+  },
   "mixins": [
     "sonarus_helper.mixins.json"
   ],
