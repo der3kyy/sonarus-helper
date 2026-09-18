@@ -1,6 +1,5 @@
 package win.sonarus.helper.mixin;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,8 +12,6 @@ import win.sonarus.helper.notifications.ClientFocusState;
 
 @Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin {
-    private static boolean sonarusHelper$hDown;
-
     @Inject(method = "tick", at = @At("TAIL"))
     private void sonarusHelper$onTick(CallbackInfo ci) {
         Minecraft client = (Minecraft) (Object) this;
@@ -27,15 +24,5 @@ public abstract class MinecraftClientMixin {
             client.gui.setScreen(new SonarusSettingsScreen(null));
         }
 
-        boolean hDown = InputConstants.isKeyDown(InputConstants.KEY_H);
-
-        if (hDown
-                && !sonarusHelper$hDown
-                && client.gui.screen() == null
-                && SonarusServer.isConnected()) {
-            client.gui.setScreen(new SonarusSettingsScreen(null));
-        }
-
-        sonarusHelper$hDown = hDown;
     }
 }
