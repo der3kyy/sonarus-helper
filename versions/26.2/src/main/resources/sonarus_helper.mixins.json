@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "win.sonarus.helper.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "DialogScreenAccessor",
+    "ScrollableLayoutAccessor",
+    "ScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
