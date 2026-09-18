@@ -4,7 +4,7 @@ Client-side Fabric helper for the Sonarus Minecraft server.
 
 ## Version
 
-Sonarus Helper **1.2**.
+Sonarus Helper **1.1**.
 
 ## Features
 
