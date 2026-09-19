@@ -20,6 +20,8 @@ public final class SonarusHelperConfig {
 
     public boolean checkUpdates = true;
     public boolean autoDownloadUpdates = false;
+    public boolean rememberPassword = false;
+    public boolean autoFillPassword = false;
     public long lastUpdateCheckEpochMs = 0L;
 
     private static SonarusHelperConfig defaults() {

@@ -7,6 +7,11 @@ import win.sonarus.helper.update.UpdateManager;
 public final class SonarusHelperClient implements ClientModInitializer {
     private static volatile boolean settingsMenuRequested;
 
+    // Keep the gradient editor code in the JAR; hide its entry point for now.
+    public static boolean isGradientEnabled() {
+        return false;
+    }
+
     public static void requestSettingsMenu() {
         settingsMenuRequested = true;
     }

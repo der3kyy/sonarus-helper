@@ -5,6 +5,7 @@
   "client": [
     "ClientPacketListenerMixin",
     "DialogScreenAccessor",
+    "LoginButtonMixin",
     "MinecraftClientMixin",
     "ScrollableLayoutAccessor",
     "ScreenMixin"

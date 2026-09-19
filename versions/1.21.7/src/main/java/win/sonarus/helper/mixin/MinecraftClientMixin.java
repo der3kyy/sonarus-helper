@@ -8,12 +8,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import win.sonarus.helper.SonarusHelperClient;
 import win.sonarus.helper.core.SonarusServer;
 import win.sonarus.helper.gui.SonarusSettingsScreen;
+import win.sonarus.helper.features.dialog.PasswordLoginFeature;
 
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin {
     @Inject(method = "tick", at = @At("TAIL"))
     private void sonarusHelper$onTick(CallbackInfo ci) {
         MinecraftClient client = (MinecraftClient) (Object) this;
+        PasswordLoginFeature.tick(client.currentScreen);
 
         if (client.currentScreen == null
                 && SonarusServer.isConnected()
