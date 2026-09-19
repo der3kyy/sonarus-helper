@@ -9,12 +9,14 @@ import win.sonarus.helper.SonarusHelperClient;
 import win.sonarus.helper.core.SonarusServer;
 import win.sonarus.helper.gui.SonarusSettingsScreen;
 import win.sonarus.helper.features.dialog.PasswordLoginFeature;
+import win.sonarus.helper.features.command.ClientCommandFeature;
 
 @Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin {
     @Inject(method = "tick", at = @At("TAIL"))
     private void sonarusHelper$onTick(CallbackInfo ci) {
         Minecraft client = (Minecraft) (Object) this;
+        ClientCommandFeature.registerIfNeeded();
         PasswordLoginFeature.tick(client.gui.screen());
 
         if (client.gui.screen() == null
